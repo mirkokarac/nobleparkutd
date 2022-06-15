@@ -15,6 +15,9 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// allow cors for client app
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
@@ -41,6 +44,10 @@ if (app.Environment.IsDevelopment())
 // app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors(policy => {
+    policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+});
 
 app.UseAuthorization();
 
