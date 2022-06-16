@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import { Header, List } from 'semantic-ui-react';
 
 function App() {
   const[players, setPlayers] = useState([]);
@@ -14,15 +15,13 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <ul>
+    <div>
+      <Header as='h2' icon='users' content='Players' />
+        <List>
           {players.map((player: any) => (
-            <li key={player.id}>{player.firstName}</li>
+            <List.Item key={player.id}>{player.firstName}</List.Item>
           ))}
-        </ul>
-      </header>
+        </List>
     </div>
   );
 }
