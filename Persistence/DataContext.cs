@@ -9,6 +9,6 @@ namespace Persistence
         {
         }
 
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Player>? Players { get; set; }
     }
 }
