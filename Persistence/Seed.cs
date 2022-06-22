@@ -10,7 +10,11 @@ namespace Persistence
     {
         public static async Task SeedData(DataContext context)
         {
-            if (context.Players.Any()) return;
+            if(context.Players is not null)
+            {
+                if (context.Players.Any()) return;
+            }
+            
 
             var players = new List<Player>
             {
@@ -149,7 +153,12 @@ namespace Persistence
             };
 
             players.OrderBy(x => x.FirstName);
-            await context.Players.AddRangeAsync(players);
+
+            if(context.Players is not null)
+            {
+                await context.Players.AddRangeAsync(players);
+            }
+            
             await context.SaveChangesAsync();
         }
     }
