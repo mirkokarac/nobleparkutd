@@ -1,4 +1,5 @@
-using Application.Players;
+using Application.Core;
+using Application.Players.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
 });
 
 builder.Services.AddMediatR(typeof(List.Handler).Assembly);
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 // allow cors for client app
 builder.Services.AddCors();
