@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Header, List } from 'semantic-ui-react';
 import { Player } from '../models/player';
+import NavBar from './NavBar';
 
 function App() {
   const[players, setPlayers] = useState<Player[]>([]);
@@ -14,7 +15,7 @@ function App() {
 
   return (
     <div>
-      <Header as='h2' icon='users' content='Players' />
+      <NavBar />
         <List>
           {players.map(player => (
             <List.Item key={player.id}>{player.firstName}</List.Item>
