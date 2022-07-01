@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nbu-blue-bg {
+  background-color: #052440 !important;
+}
+
+.nbu-red-bg{
+    background-color: #9b1316 !important;
+}
+
+.nbu-gold-bg {
+  background-color: #9b8253 !important;
+}
+
+.nbu-gold-bg:hover{
+  background-color: #7a6641 !important;
+
+}
+
+.nbu-white {
+  color: white !important;
+}
