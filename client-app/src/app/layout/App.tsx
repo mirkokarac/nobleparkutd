@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
 import { Container } from 'semantic-ui-react';
 import { Player } from '../models/player';
 import NavBar from './NavBar';
 import PlayerDashboard from '../../features/players/dashboard/PlayerDashboard';
 import {v4 as uuid} from 'uuid';
+import agent from '../api/agent';
 
 function App() {
   const[players, setPlayers] = useState<Player[]>([]);
@@ -12,8 +12,8 @@ function App() {
   const[editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    axios.get<Player[]>('http://localhost:5000/api/players').then(response => {
-      setPlayers(response.data);
+    agent.Players.list().then(response => {
+      setPlayers(response);
     })
   }, [])
 
