@@ -1,17 +1,25 @@
 import React from "react";
-import { Button, Container, Menu, MenuItem } from "semantic-ui-react";
+import { Button, Container, Icon, Menu } from "semantic-ui-react";
 
-export default function NavBar()
+interface Props 
+{
+    openForm: () => void;
+}
+
+export default function NavBar({openForm} : Props)
 {
     return(
-        <Menu inverted fixed="top">
+        <Menu inverted className="nbu-blue-bg nbu-white" fixed="top">
             <Container>
                 <Menu.Item header>
-                    <img src="/assets/logo.png" alt="Logo"></img>
+                    <Icon name='users' size='large' />
                 </Menu.Item>
-                <Menu.Item name="Players" />
+                <Menu.Item name="Players" className="nbu-white" />
                 <Menu.Item>
-                    <Button positive content="Create Player" />
+                    <Button 
+                        onClick={openForm}
+                        className="nbu-gold-bg nbu-white" content="Create Player" 
+                    />
                 </Menu.Item>
             </Container>
         </Menu>
