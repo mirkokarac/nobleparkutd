@@ -5,15 +5,18 @@ import NavBar from './NavBar';
 import PlayerDashboard from '../../features/players/dashboard/PlayerDashboard';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
+import LoadingComponent from './LoadingComponent';
 
 function App() {
   const[players, setPlayers] = useState<Player[]>([]);
   const[selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(undefined);
   const[editMode, setEditMode] = useState(false);
+  const[loading, setLoading] = useState(true);
 
   useEffect(() => {
     agent.Players.list().then(response => {
       setPlayers(response);
+      setLoading(false);
     })
   }, [])
 
@@ -51,6 +54,8 @@ function handleDeletePlayer(id:string){
   setPlayers([...players.filter(x => x.id !== id)]);
 }
 
+  if(loading) return <LoadingComponent content='Loading app' />
+  
   return (
     <>
       <NavBar openForm={handleFormOpen} />
