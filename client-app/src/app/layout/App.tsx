@@ -86,6 +86,7 @@ function handleDeletePlayer(id:string){
           closeForm={handleFormClose}
           createOrEdit={handleCreateOrEditPlayer}
           deletePlayer={handleDeletePlayer}
+          submitting={submitting}
         />
       </Container>
     </>
