@@ -44,11 +44,26 @@ function App() {
 
   function handleCreateOrEditPlayer(player: Player)
   {
-    player.id 
-      ? setPlayers([...players.filter(x => x.id !== player.id), player])
-      : setPlayers([...players, {...player, id:uuid()}]);
-      setEditMode(false);
-      setSelectedPlayer(player);
+    setSubmitting(true);
+    if(player.id)
+    {
+      agent.Players.update(player).then(() => {
+        setPlayers([...players.filter(x => x.id !== player.id), player]);
+        setSelectedPlayer(player);
+        setEditMode(false);
+        setSubmitting(false);
+      });
+    }
+    else
+    {
+      player.id = uuid();
+      agent.Players.create(player).then(() => {
+        setPlayers([...players, player]);
+        setSelectedPlayer(player);
+        setEditMode(false);
+        setSubmitting(false);        
+      });
+    }
   }
 
 function handleDeletePlayer(id:string){
