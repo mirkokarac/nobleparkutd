@@ -13,6 +13,14 @@ interface Props
 export default function PlayerList({players, selectPlayer, 
     deletePlayer, submitting} : Props)
 {
+    const[target, setTarget] = useState("");
+
+    function handlePlayerDelete(e: SyntheticEvent<HTMLButtonElement>, id: string)
+    {
+        setTarget(e.currentTarget.name);
+        deletePlayer(id);
+    }
+
     return(
         <Segment>
             <Item.Group divided>
