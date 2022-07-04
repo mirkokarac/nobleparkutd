@@ -46,6 +46,7 @@ export default function PlayerDashboard({players, selectedPlayer,
                         player={selectedPlayer} 
                         closeForm={closeForm}
                         createOrEdit={createOrEdit}
+                        submitting={submitting}
                     />
                 }
             </Grid.Column>
