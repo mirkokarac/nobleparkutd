@@ -30,6 +30,7 @@ export default function PlayerDashboard({players, selectedPlayer,
                     players={players} 
                     selectPlayer={selectPlayer}
                     deletePlayer={deletePlayer}
+                    submitting={submitting}
                 />
             </Grid.Column>
             <Grid.Column width="6">
