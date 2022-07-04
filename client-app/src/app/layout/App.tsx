@@ -67,7 +67,11 @@ function App() {
   }
 
 function handleDeletePlayer(id:string){
-  setPlayers([...players.filter(x => x.id !== id)]);
+  setSubmitting(true);
+  agent.Players.delete(id).then(() =>{
+    setPlayers([...players.filter(x => x.id !== id)]);
+    setSubmitting(false);
+  });
 }
 
   if(loading) return <LoadingComponent content='Loading app' />
