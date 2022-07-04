@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Player } from "../../../app/models/player";
 
