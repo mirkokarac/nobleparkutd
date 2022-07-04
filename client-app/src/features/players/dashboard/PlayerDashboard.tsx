@@ -16,11 +16,12 @@ interface Props
     closeForm: () => void;
     createOrEdit: (player: Player) => void;
     deletePlayer: (id: string) => void;
+    submitting: boolean;
 }
 
 export default function PlayerDashboard({players, selectedPlayer,
     selectPlayer, cancelSelectPlayer, editMode,
-    openForm, closeForm, createOrEdit, deletePlayer} : Props)
+    openForm, closeForm, createOrEdit, deletePlayer, submitting} : Props)
 {
     return(
         <Grid>
