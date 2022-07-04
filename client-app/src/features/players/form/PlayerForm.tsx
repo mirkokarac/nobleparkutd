@@ -7,10 +7,11 @@ interface Props
     player: Player | undefined;
     closeForm: () => void;
     createOrEdit: (player: Player) => void;
+    submitting: boolean;
 }
 
 export default function PlayerForm({player: selectedPlayer, 
-    closeForm, createOrEdit} : Props)
+    closeForm, createOrEdit, submitting} : Props)
 {
 
     const initialState = selectedPlayer ?? {
@@ -43,10 +44,17 @@ export default function PlayerForm({player: selectedPlayer,
                     onChange={handleInputChange} />
                 <Form.Input placeholder='Position' value={player.position} name="position"
                     onChange={handleInputChange} />
-                <Button floated="right" positive type="submit" content="Submit" />
+                <Button 
+                    loading={submitting}
+                    floated="right" 
+                    positive type="submit" 
+                    content="Submit" 
+                />
                 <Button 
                     onClick={closeForm}
-                    floated="right" type="button" content="Cancel" 
+                    floated="right" 
+                    type="button" 
+                    content="Cancel" 
                 />
             </Form>
         </Segment>
