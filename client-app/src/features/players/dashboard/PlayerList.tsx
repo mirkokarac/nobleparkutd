@@ -38,9 +38,13 @@ export default function PlayerList({players, selectPlayer,
                                 <Button onClick={() => selectPlayer(player.id)} 
                                     floated="right" content="View" 
                                     className="nbu-blue-bg nbu-white" />                                
-                                <Button onClick={() => deletePlayer(player.id)} 
+                                <Button 
+                                    name={player.id}
+                                    onClick={(e) => handlePlayerDelete(e, player.id)} 
                                     floated="right" content="Delete" 
-                                    className="nbu-red-bg nbu-white" />
+                                    className="nbu-red-bg nbu-white"
+                                    loading={submitting && target === player.id} 
+                                />
                                 <Label basic content={player.position} />
                             </Item.Extra>
                         </Item.Content>
