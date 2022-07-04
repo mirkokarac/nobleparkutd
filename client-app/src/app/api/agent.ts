@@ -30,7 +30,11 @@ const request = {
 }
 
 const Players = {
-    list: () => request.get<Player[]>("/players")
+    list: () => request.get<Player[]>("/players"),
+    details: (id: string) => request.get<Player>(`/players/${id}`),
+    create: (player: Player) => axios.post<void>("/players", player),
+    update: (player: Player) => axios.put<void>(`/players/${player.id}`, player),
+    delete: (id: string) => axios.delete<void>(`/players/${id}`)
 }
 
 const agent = {
