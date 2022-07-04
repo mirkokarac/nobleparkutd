@@ -7,9 +7,11 @@ interface Props
     players: Player[];
     selectPlayer: (id: string) => void;
     deletePlayer: (id: string) => void;
+    submitting: boolean;
 }
 
-export default function PlayerList({players, selectPlayer, deletePlayer} : Props)
+export default function PlayerList({players, selectPlayer, 
+    deletePlayer, submitting} : Props)
 {
     return(
         <Segment>
