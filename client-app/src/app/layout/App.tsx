@@ -12,6 +12,7 @@ function App() {
   const[selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(undefined);
   const[editMode, setEditMode] = useState(false);
   const[loading, setLoading] = useState(true);
+  const[submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     agent.Players.list().then(response => {
