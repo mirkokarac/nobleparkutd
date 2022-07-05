@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export default class PlayerStore
 {
@@ -6,8 +6,8 @@ export default class PlayerStore
 
     constructor() 
     {
-        makeObservable(this, {
-            firstName: observable
+        makeAutoObservable(this);
+    }
 
     setFirstName = () => 
     {
