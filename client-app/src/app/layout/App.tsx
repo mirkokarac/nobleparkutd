@@ -83,6 +83,7 @@ function handleDeletePlayer(id:string){
     <>
       <NavBar openForm={handleFormOpen} />
       <Container style={{marginTop: "7em"}}>
+        <h2>{playerStore.firstName}</h2>
         <PlayerDashboard 
           players={players}
           selectedPlayer={selectedPlayer}
