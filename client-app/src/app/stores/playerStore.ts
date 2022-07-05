@@ -8,6 +8,9 @@ export default class PlayerStore
     {
         makeObservable(this, {
             firstName: observable
-        });
+
+    setFirstName = () => 
+    {
+        this.firstName = this.firstName  + "!";
     }
 }
