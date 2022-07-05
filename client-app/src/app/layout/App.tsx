@@ -7,6 +7,7 @@ import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
+import { observer } from 'mobx-react-lite';
 
 function App() {
   const{playerStore} = useStore();
@@ -101,4 +102,4 @@ function handleDeletePlayer(id:string){
   );
 }
 
-export default App;
+export default observer(App);
