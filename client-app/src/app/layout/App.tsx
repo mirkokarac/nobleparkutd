@@ -6,8 +6,11 @@ import PlayerDashboard from '../../features/players/dashboard/PlayerDashboard';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
+import { useStore } from '../stores/store';
 
 function App() {
+  const{playerStore} = useStore();
+
   const[players, setPlayers] = useState<Player[]>([]);
   const[selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(undefined);
   const[editMode, setEditMode] = useState(false);
