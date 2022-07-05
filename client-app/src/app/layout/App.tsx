@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { Player } from '../models/player';
 import NavBar from './NavBar';
 import PlayerDashboard from '../../features/players/dashboard/PlayerDashboard';
@@ -85,6 +85,7 @@ function handleDeletePlayer(id:string){
       <NavBar openForm={handleFormOpen} />
       <Container style={{marginTop: "7em"}}>
         <h2>{playerStore.firstName}</h2>
+        <Button content="Add exclamation" positive onClick={playerStore.setFirstName} />
         <PlayerDashboard 
           players={players}
           selectedPlayer={selectedPlayer}
