@@ -1,6 +1,7 @@
-import React from "react";
+import { observer } from "mobx-react-lite";
 import { Grid } from "semantic-ui-react";
 import { Player } from "../../../app/models/player";
+import { useStore } from "../../../app/stores/store";
 import PlayerDetails from "../details/PlayerDetails";
 import PlayerForm from "../form/PlayerForm";
 import PlayerList from "./PlayerList";
@@ -8,44 +9,32 @@ import PlayerList from "./PlayerList";
 interface Props
 {
     players: Player[];
-    selectedPlayer: Player | undefined;
-    selectPlayer: (id: string) => void;
-    cancelSelectPlayer: () => void;
-    editMode: boolean;
-    openForm: (id: string) => void;
-    closeForm: () => void;
     createOrEdit: (player: Player) => void;
     deletePlayer: (id: string) => void;
     submitting: boolean;
 }
 
-export default function PlayerDashboard({players, selectedPlayer,
-    selectPlayer, cancelSelectPlayer, editMode,
-    openForm, closeForm, createOrEdit, deletePlayer, submitting} : Props)
+export default observer(function PlayerDashboard({players,
+    createOrEdit, deletePlayer, submitting} : Props)
 {
+    const {playerStore} = useStore();
+    const {selectedPlayer, editMode} = playerStore;
     return(
         <Grid>
             <Grid.Column width="10">
                 <PlayerList 
-                    players={players} 
-                    selectPlayer={selectPlayer}
+                    players={players}
                     deletePlayer={deletePlayer}
                     submitting={submitting}
                 />
             </Grid.Column>
             <Grid.Column width="6">
                 {selectedPlayer && !editMode &&
-                    <PlayerDetails 
-                        player={selectedPlayer}
-                        cancelSelectPlayer={cancelSelectPlayer} 
-                        openForm={openForm}
-                    />
+                    <PlayerDetails />
                 }
 
                 {editMode &&
                     <PlayerForm 
-                        player={selectedPlayer} 
-                        closeForm={closeForm}
                         createOrEdit={createOrEdit}
                         submitting={submitting}
                     />
@@ -53,4 +42,4 @@ export default function PlayerDashboard({players, selectedPlayer,
             </Grid.Column>
         </Grid>
     )
-}
+});
