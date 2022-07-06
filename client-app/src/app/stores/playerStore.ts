@@ -34,4 +34,25 @@ export default class PlayerStore
     {
         this.loadingInitial = state;
     }
+
+    selectPlayer = (id: string) =>
+    {
+        this.selectedPlayer = this.players.find(p => p.id === id);
+    }
+
+    cancelSelectedPlayer = () =>
+    {
+        this.selectedPlayer = undefined;
+    }
+
+    openForm = (id?: string) =>
+    {
+        id ? this.selectPlayer(id) : this.cancelSelectedPlayer();
+        this.editMode = true;
+    }
+
+    closeForm = () =>
+    {
+        this.editMode = false;
+    }
 }
