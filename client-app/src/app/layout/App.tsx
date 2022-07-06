@@ -18,12 +18,10 @@ function App() {
   const[loading, setLoading] = useState(true);
   const[submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    agent.Players.list().then(response => {
-      setPlayers(response);
-      setLoading(false);
-    })
-  }, [])
+  useEffect(() => 
+  {
+    playerStore.loadPlayers();
+  }, [playerStore])
 
   function handleSelectPlayer(id: string)
   {
