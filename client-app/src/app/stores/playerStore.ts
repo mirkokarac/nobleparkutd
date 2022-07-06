@@ -1,16 +1,31 @@
 import { makeAutoObservable } from "mobx";
+import agent from "../api/agent";
+import { Player } from "../models/player";
 
 export default class PlayerStore
 {
-    firstName = "Mirko Karac";
+    players: Player[] = [];
+    selectedPlayer: Player | null = null;
+    editMode = false;
+    loading = false;
+    loadingInitial = false;
 
     constructor() 
     {
         makeAutoObservable(this);
     }
 
-    setFirstName = () => 
+    loadPlayers = async () =>
     {
-        this.firstName = this.firstName  + "!";
+        this.loadingInitial = true;
+        try 
+        {
+            this.players = await agent.Players.list();            
+            this.loadingInitial = false;
+        } catch (error) 
+        {
+            console.log(error);
+            this.loadingInitial = false;
+        }
     }
 }
