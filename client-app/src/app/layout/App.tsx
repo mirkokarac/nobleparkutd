@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Player } from '../models/player';
 import NavBar from './NavBar';
@@ -20,28 +20,7 @@ function App() {
   useEffect(() => 
   {
     playerStore.loadPlayers();
-  }, [playerStore])
-
-  function handleSelectPlayer(id: string)
-  {
-    setSelectedPlayer(players.find(x => x.id === id));
-  }
-
-  function handleCancelSelectPlayer()
-  {
-    setSelectedPlayer(undefined);
-  }
-
-  function handleFormOpen(id?: string)
-  {
-    id ? handleSelectPlayer(id) : handleCancelSelectPlayer();
-    setEditMode(true);
-  }
-
-  function handleFormClose()
-  {
-    setEditMode(false);
-  }
+  }, [playerStore]);
 
   function handleCreateOrEditPlayer(player: Player)
   {
@@ -79,16 +58,10 @@ function handleDeletePlayer(id:string){
   
   return (
     <>
-      <NavBar openForm={handleFormOpen} />
+      <NavBar />
       <Container style={{marginTop: "7em"}}>
         <PlayerDashboard 
           players={playerStore.players}
-          selectedPlayer={selectedPlayer}
-          selectPlayer={handleSelectPlayer}
-          cancelSelectPlayer={handleCancelSelectPlayer}
-          editMode={editMode}
-          openForm={handleFormOpen}
-          closeForm={handleFormClose}
           createOrEdit={handleCreateOrEditPlayer}
           deletePlayer={handleDeletePlayer}
           submitting={submitting}
