@@ -85,7 +85,7 @@ function handleDeletePlayer(id:string){
         <h2>{playerStore.firstName}</h2>
         <Button content="Add exclamation" positive onClick={playerStore.setFirstName} />
         <PlayerDashboard 
-          players={players}
+          players={playerStore.players}
           selectedPlayer={selectedPlayer}
           selectPlayer={handleSelectPlayer}
           cancelSelectPlayer={handleCancelSelectPlayer}
