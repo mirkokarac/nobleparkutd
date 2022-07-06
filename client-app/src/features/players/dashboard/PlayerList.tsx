@@ -1,16 +1,17 @@
-import React, { SyntheticEvent, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { SyntheticEvent, useState } from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { Player } from "../../../app/models/player";
+import { useStore } from "../../../app/stores/store";
 
 interface Props
 {
     players: Player[];
-    selectPlayer: (id: string) => void;
     deletePlayer: (id: string) => void;
     submitting: boolean;
 }
 
-export default function PlayerList({players, selectPlayer, 
+export default observer(function PlayerList({players, 
     deletePlayer, submitting} : Props)
 {
     const[target, setTarget] = useState("");
@@ -20,6 +21,8 @@ export default function PlayerList({players, selectPlayer,
         setTarget(e.currentTarget.name);
         deletePlayer(id);
     }
+
+    const {playerStore} = useStore();
 
     return(
         <Segment>
@@ -35,7 +38,7 @@ export default function PlayerList({players, selectPlayer,
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             </Item.Description>
                             <Item.Extra>
-                                <Button onClick={() => selectPlayer(player.id)} 
+                                <Button onClick={() => playerStore.selectPlayer(player.id)} 
                                     floated="right" content="View" 
                                     className="nbu-blue-bg nbu-white" />                                
                                 <Button 
@@ -53,4 +56,4 @@ export default function PlayerList({players, selectPlayer,
             </Item.Group>
         </Segment>
     )
-}
+});
