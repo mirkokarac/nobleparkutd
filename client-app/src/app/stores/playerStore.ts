@@ -17,15 +17,21 @@ export default class PlayerStore
 
     loadPlayers = async () =>
     {
-        this.loadingInitial = true;
+        this.setLoadingInitial(true);
         try 
         {
-            this.players = await agent.Players.list();            
-            this.loadingInitial = false;
+            this.players = await agent.Players.list();
+            this.setLoadingInitial(false);
+            
         } catch (error) 
         {
             console.log(error);
-            this.loadingInitial = false;
+            this.setLoadingInitial(false);
         }
+    }
+
+    setLoadingInitial = (state: boolean) =>
+    {
+        this.loadingInitial = state;
     }
 }
