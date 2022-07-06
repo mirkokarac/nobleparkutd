@@ -1,13 +1,11 @@
-import React from "react";
+import { observer } from "mobx-react-lite";
 import { Button, Container, Icon, Menu } from "semantic-ui-react";
+import { useStore } from "../stores/store";
 
-interface Props 
+export default observer(function NavBar()
 {
-    openForm: () => void;
-}
+    const {playerStore} = useStore();
 
-export default function NavBar({openForm} : Props)
-{
     return(
         <Menu inverted className="nbu-blue-bg nbu-white" fixed="top">
             <Container>
@@ -17,11 +15,11 @@ export default function NavBar({openForm} : Props)
                 <Menu.Item name="Players" className="nbu-white" />
                 <Menu.Item>
                     <Button 
-                        onClick={openForm}
+                        onClick={() => playerStore.openForm()}
                         className="nbu-gold-bg nbu-white" content="Create Player" 
                     />
                 </Menu.Item>
             </Container>
         </Menu>
     )
-}
+});
