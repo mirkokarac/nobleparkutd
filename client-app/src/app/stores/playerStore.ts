@@ -5,7 +5,7 @@ import { Player } from "../models/player";
 export default class PlayerStore
 {
     players: Player[] = [];
-    selectedPlayer: Player | null = null;
+    selectedPlayer: Player | undefined = undefined;
     editMode = false;
     loading = false;
     loadingInitial = false;
