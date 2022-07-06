@@ -1,18 +1,20 @@
-import React, { ChangeEvent, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { Player } from "../../../app/models/player";
+import { useStore } from "../../../app/stores/store";
 
 interface Props
 {
-    player: Player | undefined;
-    closeForm: () => void;
     createOrEdit: (player: Player) => void;
     submitting: boolean;
 }
 
-export default function PlayerForm({player: selectedPlayer, 
-    closeForm, createOrEdit, submitting} : Props)
+export default observer(function PlayerForm({createOrEdit, 
+    submitting} : Props)
 {
+    const {playerStore} = useStore();
+    const {selectedPlayer, closeForm} = playerStore;    
 
     const initialState = selectedPlayer ?? {
         id: '',
@@ -59,4 +61,4 @@ export default function PlayerForm({player: selectedPlayer,
             </Form>
         </Segment>
     )
-}
+});
