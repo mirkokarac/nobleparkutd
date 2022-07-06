@@ -1,16 +1,16 @@
-import React from "react";
+import { observer } from "mobx-react-lite";
 import { Button, Card, Image } from "semantic-ui-react";
-import { Player } from "../../../app/models/player";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { useStore } from "../../../app/stores/store";
 
-interface Props 
+export default observer(function PlayerDetails()
 {
-    player: Player;
-    cancelSelectPlayer: () => void;
-    openForm: (id: string) => void;
-}
+    const {playerStore} = useStore();
+    const {selectedPlayer: player, openForm, 
+        cancelSelectedPlayer} = playerStore;
 
-export default function PlayerDetails({player, cancelSelectPlayer, openForm} : Props)
-{
+    if (!player) return <LoadingComponent />;
+
     return(
     <Card fluid>
         <Card.Content>
@@ -30,11 +30,11 @@ export default function PlayerDetails({player, cancelSelectPlayer, openForm} : P
                     basic color="blue" content='Edit' 
                 />
                 <Button 
-                    onClick={cancelSelectPlayer}
+                    onClick={cancelSelectedPlayer}
                     basic color="grey" content='Cancel' 
                 />
             </Button.Group>
         </Card.Content>
   </Card>
     );
-}
+});
