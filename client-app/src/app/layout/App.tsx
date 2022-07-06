@@ -76,7 +76,7 @@ function handleDeletePlayer(id:string){
   });
 }
 
-  if(loading) return <LoadingComponent content='Loading app' />
+  if(playerStore.loadingInitial) return <LoadingComponent content='Loading app' />
   
   return (
     <>
