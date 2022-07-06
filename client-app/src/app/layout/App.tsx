@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Button, Container } from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import { Container } from 'semantic-ui-react';
 import { Player } from '../models/player';
 import NavBar from './NavBar';
 import PlayerDashboard from '../../features/players/dashboard/PlayerDashboard';
@@ -15,7 +15,6 @@ function App() {
   const[players, setPlayers] = useState<Player[]>([]);
   const[selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(undefined);
   const[editMode, setEditMode] = useState(false);
-  const[loading, setLoading] = useState(true);
   const[submitting, setSubmitting] = useState(false);
 
   useEffect(() => 
@@ -82,8 +81,6 @@ function handleDeletePlayer(id:string){
     <>
       <NavBar openForm={handleFormOpen} />
       <Container style={{marginTop: "7em"}}>
-        <h2>{playerStore.firstName}</h2>
-        <Button content="Add exclamation" positive onClick={playerStore.setFirstName} />
         <PlayerDashboard 
           players={playerStore.players}
           selectedPlayer={selectedPlayer}
