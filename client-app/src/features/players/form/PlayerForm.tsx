@@ -6,8 +6,7 @@ import { useStore } from "../../../app/stores/store";
 export default observer(function PlayerForm()
 {
     const {playerStore} = useStore();
-    const {selectedPlayer, closeForm,
-        createPlayer, updatePlayer, loading} = playerStore;    
+    const {selectedPlayer, createPlayer, updatePlayer, loading} = playerStore;    
 
     const initialState = selectedPlayer ?? {
         id: '',
@@ -45,7 +44,6 @@ export default observer(function PlayerForm()
                     content="Submit" 
                 />
                 <Button 
-                    onClick={closeForm}
                     floated="right" 
                     type="button" 
                     content="Cancel" 
