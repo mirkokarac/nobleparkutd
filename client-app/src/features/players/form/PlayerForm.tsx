@@ -21,8 +21,7 @@ export default observer(function PlayerForm()
 
     function handleSubmit()
     {
-        createOrEdit(player);
-        console.log(player);
+        player.id ? updatePlayer(player) : createPlayer(player);
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>)
