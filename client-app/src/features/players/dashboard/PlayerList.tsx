@@ -1,19 +1,12 @@
 import { observer } from "mobx-react-lite";
 import { SyntheticEvent, useState } from "react";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
-import { Player } from "../../../app/models/player";
 import { useStore } from "../../../app/stores/store";
 
-interface Props
+export default observer(function PlayerList()
 {
-    players: Player[];
-    deletePlayer: (id: string) => void;
-    submitting: boolean;
-}
-
-export default observer(function PlayerList({players, 
-    deletePlayer, submitting} : Props)
-{
+    const {playerStore} = useStore();
+    const {players, deletePlayer, loading } = playerStore;
     const[target, setTarget] = useState("");
 
     function handlePlayerDelete(e: SyntheticEvent<HTMLButtonElement>, id: string)
@@ -21,9 +14,7 @@ export default observer(function PlayerList({players,
         setTarget(e.currentTarget.name);
         deletePlayer(id);
     }
-
-    const {playerStore} = useStore();
-
+    
     return(
         <Segment>
             <Item.Group divided>
@@ -46,7 +37,7 @@ export default observer(function PlayerList({players,
                                     onClick={(e) => handlePlayerDelete(e, player.id)} 
                                     floated="right" content="Delete" 
                                     className="nbu-red-bg nbu-white"
-                                    loading={submitting && target === player.id} 
+                                    loading={loading && target === player.id} 
                                 />
                                 <Label basic content={player.position} />
                             </Item.Extra>
