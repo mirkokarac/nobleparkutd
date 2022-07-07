@@ -16,6 +16,12 @@ export default class PlayerStore
         makeAutoObservable(this);
     }
 
+    get playersByName()
+    {
+        return Array.from(this.playerRegistry.values())
+            .sort((a, b) => a.firstName.localeCompare(b.firstName));
+    }
+
     loadPlayers = async () =>
     {
         try 
