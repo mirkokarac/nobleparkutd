@@ -5,7 +5,7 @@ import { v4 as uuid } from "uuid";
 
 export default class PlayerStore
 {
-    players: Player[] = [];
+    playerRegistry = new Map<string, Player>();  
     selectedPlayer: Player | undefined = undefined;
     editMode = false;
     loading = false;
@@ -21,7 +21,10 @@ export default class PlayerStore
         this.setLoadingInitial(true);
         try 
         {
-            this.players = await agent.Players.list();
+            const players = await agent.Players.list();            
+            players.forEach(player => {
+                this.playerRegistry.set(player.id, player);
+            });            
             this.setLoadingInitial(false);
             
         } catch (error) 
@@ -38,7 +41,7 @@ export default class PlayerStore
 
     selectPlayer = (id: string) =>
     {
-        this.selectedPlayer = this.players.find(p => p.id === id);
+        this.selectedPlayer = this.playerRegistry.get(id);
     }
 
     cancelSelectedPlayer = () =>
@@ -66,7 +69,7 @@ export default class PlayerStore
         {
             await agent.Players.create(player);
             runInAction(() => {
-                this.players.push(player);
+                this.playerRegistry.set(player.id, player);
                 this.selectedPlayer = player;
                 this.editMode = false;
                 this.loading = false;
@@ -88,17 +91,16 @@ export default class PlayerStore
         {
             await agent.Players.update(player);
             runInAction(() => {
-                this.players = [...this.players.filter(p => p.id !== 
-                    player.id), player];
-                    this.selectedPlayer = player;
-                    this.editMode = false;
-                    this.loading = false;                    
+                this.playerRegistry.set(player.id, player);
+                this.selectedPlayer = player;
+                this.editMode = false;
+                this.loading = false;                    
             });
         } catch (error) 
         {
             console.log(error);
             runInAction(() => {
-                    this.loading = false;                    
+                this.loading = false;                    
             });            
         }
     }
@@ -110,7 +112,7 @@ export default class PlayerStore
         {
             await agent.Players.delete(id);
             runInAction(() => {
-                this.players = [...this.players.filter(p => p.id !== id)];                
+                this.playerRegistry.delete(id);                
                 if (this.selectedPlayer?.id === id) this.cancelSelectedPlayer();
                 this.loading = false;
             }); 
