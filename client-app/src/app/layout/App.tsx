@@ -5,6 +5,9 @@ import PlayerDashboard from '../../features/players/dashboard/PlayerDashboard';
 import LoadingComponent from './LoadingComponent';
 import { useStore } from '../stores/store';
 import { observer } from 'mobx-react-lite';
+import { Route, Routes } from 'react-router-dom';
+import Home from '../../features/home/Home';
+import PlayerForm from '../../features/players/form/PlayerForm';
 
 function App() {
   const{playerStore} = useStore();
