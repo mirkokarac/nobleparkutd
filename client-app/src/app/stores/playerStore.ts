@@ -55,4 +55,28 @@ export default class PlayerStore
     {
         this.editMode = false;
     }
+
+    createPlayer = async (player: Player) =>
+    {
+        this.loading = true;
+        player.id = uuid();
+
+        try 
+        {
+            await agent.Players.create(player);
+            runInAction(() => {
+                this.players.push(player);
+                this.selectedPlayer = player;
+                this.editMode = false;
+                this.loading = false;
+            });
+        } catch (error) 
+        {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            });            
+        }
+    }
+
 }
