@@ -21,6 +21,11 @@ function App() {
       <NavBar />
       <Container style={{marginTop: "7em"}}>
         <PlayerDashboard />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/players' element={<PlayerDashboard />} />
+          <Route path='/players/create' element={<PlayerForm />} />
+        </Routes>
       </Container>
     </>
   );
