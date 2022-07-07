@@ -24,11 +24,12 @@ export default class PlayerStore
 
     loadPlayers = async () =>
     {
+        this.setLoadingInitial(true);
         try 
         {
             const players = await agent.Players.list();            
             players.forEach(player => {
-                this.playerRegistry.set(player.id, player);
+                this.setPlayer(player);
             });            
             this.setLoadingInitial(false);
             
@@ -39,30 +40,42 @@ export default class PlayerStore
         }
     }
 
+    loadPlayer = async (id: string) =>
+    {
+        let player = this.getPlayer(id);
+        if(player)
+        {
+            this.selectedPlayer = player;
+        } else
+        {
+            this.setLoadingInitial(true);
+            try 
+            {
+                player = await agent.Players.details(id);
+                this.setPlayer(player);
+                this.selectedPlayer = player;
+                this.setLoadingInitial(false);
+            } catch (error) 
+            {
+                console.log(error);
+                this.setLoadingInitial(false);
+            }
+        }
+    }
+
+    private getPlayer = (id: string) =>
+    {
+        return this.playerRegistry.get(id);
+    }
+
+    private setPlayer = (player: Player) =>
+    {
+        this.playerRegistry.set(player.id, player);
+    }
+
     setLoadingInitial = (state: boolean) =>
     {
         this.loadingInitial = state;
-    }
-
-    selectPlayer = (id: string) =>
-    {
-        this.selectedPlayer = this.playerRegistry.get(id);
-    }
-
-    cancelSelectedPlayer = () =>
-    {
-        this.selectedPlayer = undefined;
-    }
-
-    openForm = (id?: string) =>
-    {
-        id ? this.selectPlayer(id) : this.cancelSelectedPlayer();
-        this.editMode = true;
-    }
-
-    closeForm = () =>
-    {
-        this.editMode = false;
     }
 
     createPlayer = async (player: Player) =>
@@ -118,7 +131,6 @@ export default class PlayerStore
             await agent.Players.delete(id);
             runInAction(() => {
                 this.playerRegistry.delete(id);                
-                if (this.selectedPlayer?.id === id) this.cancelSelectedPlayer();
                 this.loading = false;
             }); 
         } catch (error) 
