@@ -7,7 +7,8 @@ import { useStore } from "../../../app/stores/store";
 export default observer(function PlayerForm()
 {
     const {playerStore} = useStore();
-    const {selectedPlayer, closeForm} = playerStore;    
+    const {selectedPlayer, closeForm,
+        createPlayer, updatePlayer, loading} = playerStore;    
 
     const initialState = selectedPlayer ?? {
         id: '',
