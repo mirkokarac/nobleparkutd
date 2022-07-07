@@ -9,13 +9,12 @@ import PlayerList from "./PlayerList";
 interface Props
 {
     players: Player[];
-    createOrEdit: (player: Player) => void;
     deletePlayer: (id: string) => void;
     submitting: boolean;
 }
 
 export default observer(function PlayerDashboard({players,
-    createOrEdit, deletePlayer, submitting} : Props)
+    deletePlayer, submitting} : Props)
 {
     const {playerStore} = useStore();
     const {selectedPlayer, editMode} = playerStore;
@@ -34,10 +33,7 @@ export default observer(function PlayerDashboard({players,
                 }
 
                 {editMode &&
-                    <PlayerForm 
-                        createOrEdit={createOrEdit}
-                        submitting={submitting}
-                    />
+                    <PlayerForm />
                 }
             </Grid.Column>
         </Grid>
