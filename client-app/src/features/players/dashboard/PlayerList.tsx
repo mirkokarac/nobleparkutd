@@ -4,9 +4,9 @@ import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function PlayerList()
-{
+{   
     const {playerStore} = useStore();
-    const {players, deletePlayer, loading } = playerStore;
+    const {playersByName, deletePlayer, loading } = playerStore;
     const[target, setTarget] = useState("");
 
     function handlePlayerDelete(e: SyntheticEvent<HTMLButtonElement>, id: string)
@@ -18,7 +18,7 @@ export default observer(function PlayerList()
     return(
         <Segment>
             <Item.Group divided>
-                {players.map(player =>(
+                {playersByName.map(player =>(
                     <Item key={player.id}>
                         <Item.Content>
                             <Item.Header as="a">
