@@ -40,7 +40,7 @@ export default observer(function PlayerForm()
                 <Form.Input placeholder='Position' value={player.position} name="position"
                     onChange={handleInputChange} />
                 <Button 
-                    loading={submitting}
+                    loading={loading}
                     floated="right" 
                     positive type="submit" 
                     content="Submit" 
