@@ -1,12 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { Button, Container, Icon, Menu } from "semantic-ui-react";
-import { useStore } from "../stores/store";
 
 export default observer(function NavBar()
 {
-    const {playerStore} = useStore();
-
     return(
         <Menu inverted className="nbu-blue-bg nbu-white" fixed="top">
             <Container>
