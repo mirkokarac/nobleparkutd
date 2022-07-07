@@ -4,14 +4,7 @@ import { Button, Form, Segment } from "semantic-ui-react";
 import { Player } from "../../../app/models/player";
 import { useStore } from "../../../app/stores/store";
 
-interface Props
-{
-    createOrEdit: (player: Player) => void;
-    submitting: boolean;
-}
-
-export default observer(function PlayerForm({createOrEdit, 
-    submitting} : Props)
+export default observer(function PlayerForm()
 {
     const {playerStore} = useStore();
     const {selectedPlayer, closeForm} = playerStore;    
