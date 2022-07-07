@@ -79,4 +79,26 @@ export default class PlayerStore
         }
     }
 
+    updatePlayer = async (player:Player) => 
+    {
+        this.loading = true;
+
+        try
+        {
+            await agent.Players.update(player);
+            runInAction(() => {
+                this.players = [...this.players.filter(p => p.id !== 
+                    player.id), player];
+                    this.selectedPlayer = player;
+                    this.editMode = false;
+                    this.loading = false;                    
+            });
+        } catch (error) 
+        {
+            console.log(error);
+            runInAction(() => {
+                    this.loading = false;                    
+            });            
+        }
+    }
 }
