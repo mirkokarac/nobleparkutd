@@ -1,5 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { SyntheticEvent, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { useStore } from "../../../app/stores/store";
 
@@ -29,7 +30,7 @@ export default observer(function PlayerList()
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             </Item.Description>
                             <Item.Extra>
-                                <Button onClick={() => playerStore.selectPlayer(player.id)} 
+                                <Button as={Link} to={`/players/${player.id}`}
                                     floated="right" content="View" 
                                     className="nbu-blue-bg nbu-white" />                                
                                 <Button 
