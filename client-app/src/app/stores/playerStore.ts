@@ -9,7 +9,7 @@ export default class PlayerStore
     selectedPlayer: Player | undefined = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = false;
+    loadingInitial = true;
 
     constructor() 
     {
@@ -18,7 +18,6 @@ export default class PlayerStore
 
     loadPlayers = async () =>
     {
-        this.setLoadingInitial(true);
         try 
         {
             const players = await agent.Players.list();            
