@@ -3,14 +3,11 @@ import { useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
-import PlayerDetails from "../details/PlayerDetails";
-import PlayerForm from "../form/PlayerForm";
 import PlayerList from "./PlayerList";
 
 export default observer(function PlayerDashboard()
 {
     const {playerStore} = useStore();
-    const {selectedPlayer, editMode} = playerStore;
 
     useEffect(() => 
     {
@@ -21,17 +18,11 @@ export default observer(function PlayerDashboard()
 
     return(
         <Grid>
-            <Grid.Column width="10">
+            <Grid.Column width="16">
                 <PlayerList />
             </Grid.Column>
             <Grid.Column width="6">
-                {selectedPlayer && !editMode &&
-                    <PlayerDetails />
-                }
-
-                {editMode &&
-                    <PlayerForm />
-                }
+                <h2>Player filter</h2>
             </Grid.Column>
         </Grid>
     )
