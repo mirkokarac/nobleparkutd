@@ -102,4 +102,24 @@ export default class PlayerStore
             });            
         }
     }
+
+    deletePlayer = async (id:string) => 
+    {
+        this.loading = true;
+        try 
+        {
+            await agent.Players.delete(id);
+            runInAction(() => {
+                this.players = [...this.players.filter(p => p.id !== id)];                
+                if (this.selectedPlayer?.id === id) this.cancelSelectedPlayer();
+                this.loading = false;
+            }); 
+        } catch (error) 
+        {
+            console.log(error);
+            runInAction(() => {
+                this.loading = false;
+            });    
+        }    
+    }
 }
