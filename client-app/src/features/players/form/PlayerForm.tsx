@@ -1,12 +1,14 @@
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
+import { v4 as uuid } from "uuid";
 
 export default observer(function PlayerForm()
 {
+    const navigate = useNavigate();
     const {playerStore} = useStore();
     const {createPlayer, updatePlayer, 
         loading, loadPlayer, loadingInitial} = playerStore;
@@ -25,7 +27,19 @@ export default observer(function PlayerForm()
 
     function handleSubmit()
     {
-        player.id ? updatePlayer(player) : createPlayer(player);
+        if(player.id.length === 0)
+        {
+            let newPlayer = {
+                ...player,
+                id: uuid()
+            }
+            createPlayer(newPlayer).then(() => 
+                navigate(`/players/${newPlayer.id}`));
+        } else
+        {
+            updatePlayer(player).then(() => 
+                navigate(`/players/${player.id}`));
+        }
     }
 
     function handleInputChange(event: ChangeEvent<HTMLInputElement>)
