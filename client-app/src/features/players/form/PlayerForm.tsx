@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
@@ -65,7 +65,9 @@ export default observer(function PlayerForm()
                     positive type="submit" 
                     content="Submit" 
                 />
-                <Button 
+                <Button
+                    as={Link}
+                    to={`/players`}
                     floated="right" 
                     type="button" 
                     content="Cancel" 
