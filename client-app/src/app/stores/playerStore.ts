@@ -46,6 +46,7 @@ export default class PlayerStore
         if(player)
         {
             this.selectedPlayer = player;
+            return player;
         } else
         {
             this.setLoadingInitial(true);
@@ -53,8 +54,11 @@ export default class PlayerStore
             {
                 player = await agent.Players.details(id);
                 this.setPlayer(player);
-                this.selectedPlayer = player;
+                runInAction(() => {
+                    this.selectedPlayer = player; 
+                });                
                 this.setLoadingInitial(false);
+                return player;
             } catch (error) 
             {
                 console.log(error);
