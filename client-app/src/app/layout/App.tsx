@@ -17,6 +17,7 @@ function App() {
           <Route path='/players' element={<PlayerDashboard />} />
           <Route path='/players/:id' element={<PlayerDetails />} />
           <Route path='/players/create' element={<PlayerForm />} />
+          <Route path='/players/edit/:id' element={<PlayerForm />} />
         </Routes>
       </Container>
     </>
