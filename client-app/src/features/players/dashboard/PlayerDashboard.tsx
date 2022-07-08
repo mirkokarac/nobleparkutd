@@ -8,11 +8,12 @@ import PlayerList from "./PlayerList";
 export default observer(function PlayerDashboard()
 {
     const {playerStore} = useStore();
+    const {loadPlayers, playerRegistry} = playerStore;
 
     useEffect(() => 
     {
-      playerStore.loadPlayers();
-    }, [playerStore]);
+      if (playerRegistry.size <= 1) loadPlayers();
+    }, [playerRegistry.size, loadPlayers]);
   
     if(playerStore.loadingInitial) return <LoadingComponent content='Loading app' />
 
