@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Player } from "../models/player";
-import { v4 as uuid } from "uuid";
 
 export default class PlayerStore
 {
@@ -85,7 +84,6 @@ export default class PlayerStore
     createPlayer = async (player: Player) =>
     {
         this.loading = true;
-        player.id = uuid();
 
         try 
         {
