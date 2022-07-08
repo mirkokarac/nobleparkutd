@@ -1,21 +1,27 @@
 import { observer } from "mobx-react-lite";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Button, Form, Segment } from "semantic-ui-react";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function PlayerForm()
 {
     const {playerStore} = useStore();
-    const {selectedPlayer, createPlayer, updatePlayer, loading} = playerStore;    
+    const {createPlayer, updatePlayer, 
+        loading, loadPlayer, loadingInitial} = playerStore;
+    const {id} = useParams<{id: string}>(); 
 
-    const initialState = selectedPlayer ?? {
+    const [player, setPlayer] = useState({
         id: '',
         firstName: '',
         lastName: '',
         position: ''
-    }
+    });
 
-    const [player, setPlayer] = useState(initialState);
+    useEffect(() => {
+        if(id) loadPlayer(id).then(player => setPlayer(player!));
+    }, [id, loadPlayer]);
 
     function handleSubmit()
     {
@@ -27,6 +33,8 @@ export default observer(function PlayerForm()
         const {name, value} = event.target;
         setPlayer({...player, [name]:value})
     }
+
+    if (loadingInitial) return <LoadingComponent content="Loading player..." />;
 
     return(
         <Segment clearing>
