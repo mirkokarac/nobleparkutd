@@ -161,5 +161,45 @@ namespace Persistence
             
             await context.SaveChangesAsync();
         }
+
+        public static async Task SeedEventData(DataContext context)
+        {
+            if(context.Events is not null)
+            {
+                if (context.Events.Any()) return;
+            }
+
+            var events = new List<Event>
+            {
+                new Event
+                {
+                    Title = "Round 16 Matchup",
+                    EventDate = new DateTime(2022,07,16).ToLocalTime(),
+                    EventTime = new DateTime(2022,07,16,15,0,0).ToLocalTime(),
+                    Location = new (){
+                        Name = "Terrara Park - Pitch 3 Seniors",
+                        Address = new Address(){
+                            Street = "Terrara Road",
+                            StreetAdditional = "Vermont South",
+                            PostCode = 3133,
+                            State = "Victoria",
+                            Country = "Australia"
+                        }
+                    },
+                    Team = new Team(){
+                        Name = "Whitehorse United SC"
+                    }
+                }
+            };
+
+            events.OrderBy(x => x.EventDate);
+
+            if(context.Events is not null)
+            {
+                await context.Events.AddRangeAsync(events);
+            }
+            
+            await context.SaveChangesAsync();
+        }        
     }
 }
