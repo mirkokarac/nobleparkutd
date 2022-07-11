@@ -31,6 +31,7 @@ namespace Domain
 
     public class Address
     {
+        public Guid Id { get; set; }
         public string Number { get; set; } = String.Empty;
         public string Street { get; set; } = String.Empty;
         public string StreetAdditional { get; set; } = String.Empty;
@@ -41,6 +42,7 @@ namespace Domain
 
     public class Team
     {
+        public Guid Id { get; set; }
         public string Name { get; set; } = String.Empty;
         public string LogoUrl { get; set; } = String.Empty;        
     }
