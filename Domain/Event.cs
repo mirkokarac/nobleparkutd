@@ -11,6 +11,7 @@ namespace Domain
         public Location? Location { get; set; }
         public string ImageUrl { get; set; } = String.Empty;
         public bool Completed { get; set; } = false;
+        public Team? Team { get; set; }
     }
 
     public enum EventType
@@ -36,5 +37,11 @@ namespace Domain
         public int PostCode { get; set; }
         public string State { get; set; } = String.Empty;
         public string Country {get; set;} = String.Empty;
+    }
+
+    public class Team
+    {
+        public string Name { get; set; } = String.Empty;
+        public string LogoUrl { get; set; } = String.Empty;        
     }
 }
