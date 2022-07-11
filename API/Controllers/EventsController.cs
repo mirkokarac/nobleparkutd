@@ -1,3 +1,4 @@
+using Application.Events.Commands;
 using Application.Events.Queries;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,15 @@ public class EventsController : BaseApiController
         return await Mediator.Send(new List.Query());
     }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> GetEvent(Guid id)
-        {
-            return await Mediator.Send(new Details.Query{Id = id});
-        }    
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Event>> GetEvent(Guid id)
+    {
+        return await Mediator.Send(new Details.Query{Id = id});
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateEvent(Event eventObj)
+    {
+        return Ok(await Mediator.Send(new Create.Command{Event = eventObj}));
+    }        
 }
