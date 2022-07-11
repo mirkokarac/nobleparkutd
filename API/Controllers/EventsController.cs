@@ -11,4 +11,10 @@ public class EventsController : BaseApiController
     {
         return await Mediator.Send(new List.Query());
     }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Event>> GetEvent(Guid id)
+        {
+            return await Mediator.Send(new Details.Query{Id = id});
+        }    
 }
