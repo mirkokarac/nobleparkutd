@@ -23,5 +23,13 @@ public class EventsController : BaseApiController
     public async Task<IActionResult> CreateEvent(Event eventObj)
     {
         return Ok(await Mediator.Send(new Create.Command{Event = eventObj}));
-    }        
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> EditEvent(Guid id, Event eventObj)
+    {
+        eventObj.Id = id;
+
+        return Ok(await Mediator.Send(new Edit.Command{Event = eventObj}));
+    }
 }
