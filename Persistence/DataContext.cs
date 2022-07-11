@@ -10,5 +10,6 @@ namespace Persistence
         }
 
         public DbSet<Player>? Players { get; set; }
+        public DbSet<Event>? Events { get; set; }
     }
 }
