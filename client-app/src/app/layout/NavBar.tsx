@@ -10,6 +10,8 @@ export default observer(function NavBar()
                 <Menu.Item as={NavLink} to='/' exact='true' header>
                     <Icon name='users' size='large' />
                 </Menu.Item>
+                <Menu.Item as={NavLink} to='/events' name="Events"
+                    className="nbu-white" exact='true' />                 
                 <Menu.Item as={NavLink} to='/players' name="Players"
                     className="nbu-white" exact='true' />
                 <Menu.Item>
