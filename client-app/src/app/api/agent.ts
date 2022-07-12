@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { resolve } from "path";
 import { Player } from "../models/player";
+import { Event } from "../models/event";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -37,8 +38,17 @@ const Players = {
     delete: (id: string) => axios.delete<void>(`/players/${id}`)
 }
 
+const Events = {
+    list: () => request.get<Event[]>("/events"),
+    details: (id: string) => request.get<Event>(`/events/${id}`),
+    create: (event: Event) => axios.post<void>("/events", event),
+    update: (event: Event) => axios.put<void>(`/events/${event.id}`, event),
+    delete: (id: string) => axios.delete<void>(`/events/${id}`)
+}
+
 const agent = {
-    Players
+    Players,
+    Events
 }
 
 export default agent;
