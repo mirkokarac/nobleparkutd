@@ -19,7 +19,26 @@ public class List
 
         public async Task<List<Event>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await _context.Events.ToListAsync();
+            // TODO
+            // create EventDTO
+            // create LocationDTO
+            // create AddressDTO
+            // create TeamDTO
+            // DTO's to only have data that is to be returned
+            var events = await _context.Events!.ToListAsync();
+
+            foreach(Event eventDTO in events)
+            {
+                var location = await _context.Location!
+                    .FindAsync(eventDTO.LocationId);
+                var address = await _context.Address!
+                    .FindAsync(location!.AddressId);
+                var team = await _context.Team!
+                    .FindAsync(eventDTO.TeamId);
+                eventDTO.Location = location;
+            }
+
+            return events;
         }
     }
 }
