@@ -22,7 +22,16 @@ public class Details
         public async Task<Event> Handle(Query request, 
             CancellationToken cancellationToken)
         {
-            return await _context.Events.FindAsync(request.Id);
+            var eventDTO = await _context.Events.FindAsync(request.Id);
+            var location = await _context.Location!
+                .FindAsync(eventDTO.LocationId);
+            var address = await _context.Address!
+                .FindAsync(location!.AddressId);
+            var team = await _context.Team!
+                .FindAsync(eventDTO.TeamId);
+            eventDTO.Location = location;
+
+            return eventDTO;
         }
     }
 }
