@@ -15,7 +15,7 @@ export default observer(function PlayerDashboard()
       if (playerRegistry.size <= 1) loadPlayers();
     }, [playerRegistry.size, loadPlayers]);
   
-    if(playerStore.loadingInitial) return <LoadingComponent content='Loading app' />
+    if(playerStore.loadingInitial) return <LoadingComponent content='Loading players' />
 
     return(
         <Grid>
