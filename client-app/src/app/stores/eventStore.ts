@@ -15,7 +15,7 @@ export default class EventStore
         makeAutoObservable(this);
     }
 
-    get eventsByName()
+    get eventsByTitle()
     {
         return Array.from(this.eventRegistry.values())
             .sort((a, b) => a.title.localeCompare(b.title));
