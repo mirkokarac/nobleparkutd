@@ -49,6 +49,7 @@ function Events() {
       <Container style={{marginTop: "7em"}}>
         <Routes>          
           <Route path='/' element={<EventDashboard />} />
+          <Route path=':id' element={<Event />} />
         </Routes>
       </Container>
     </>
