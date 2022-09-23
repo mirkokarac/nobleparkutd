@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from "axios";
-import { resolve } from "path";
 import { Player } from "../models/player";
 import { Event } from "../models/event";
 
