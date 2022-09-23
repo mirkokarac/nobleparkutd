@@ -7,7 +7,8 @@ import Home from '../../features/home/Home';
 import PlayerForm from '../../features/players/form/PlayerForm';
 import PlayerDetails from '../../features/players/details/PlayerDetails';
 import { Fragment } from 'react';
-import EventDashboard from '../../features/events/dashboard/EventDashboard';
+import EventDashboard from '../../features/events/EventDashboard';
+import Event from '../../features/events/Event';
 
 function App() {
   return (
