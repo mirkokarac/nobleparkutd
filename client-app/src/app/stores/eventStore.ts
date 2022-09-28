@@ -15,6 +15,12 @@ export default class EventStore
         makeAutoObservable(this);
     }
 
+    get eventsByDate()
+    {
+        return Array.from(this.eventRegistry.values())
+            .sort((a, b) => Date.parse(a.eventDate) - Date.parse(b.eventDate));
+    }
+
     get eventsByTitle()
     {
         return Array.from(this.eventRegistry.values())
