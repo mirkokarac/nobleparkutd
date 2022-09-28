@@ -18,29 +18,6 @@ export default observer(function Event()
     if (loadingInitial || !event) return <LoadingComponent />;
     console.log(event)      
     return (
-        <Card fluid>
-        <Card.Content>
-            { <Image src={`/assets/placeholder.png`} style={{marginBottom: "1em"}}></Image> }
-            <Card.Header>{event.title}</Card.Header>
-            <Card.Meta>
-                <span>{event.eventDate}</span>
-            </Card.Meta>
-            <Card.Description>
-                { event.description}
-            </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-            <Button.Group widths={2}>
-                <Button
-                    as={Link} to={`/events/edit/${event.id}`}          
-                    basic color="blue" content='Edit' 
-                />
-                <Button
-                    as={Link} to={`/events`}
-                    basic color="grey" content='Cancel' 
-                />
-            </Button.Group>
-        </Card.Content>
-  </Card>
+
     )
 });
