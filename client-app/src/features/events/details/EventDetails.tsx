@@ -18,6 +18,15 @@ export default observer(function Event()
     if (loadingInitial || !event) return <LoadingComponent />;
     console.log(event)      
     return (
-
+        <Grid>
+            <Grid.Column width={10}>
+                <EventDetailedHeader />
+                <EventDetailedInfo />
+                <EventDetailedChat />
+            </Grid.Column>
+            <Grid.Column width={6}>
+                <EventDetailedSidebar />
+            </Grid.Column>            
+        </Grid>
     )
 });
