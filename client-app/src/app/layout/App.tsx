@@ -8,7 +8,7 @@ import PlayerForm from '../../features/players/form/PlayerForm';
 import PlayerDetails from '../../features/players/details/PlayerDetails';
 import { Fragment } from 'react';
 import EventDashboard from '../../features/events/EventDashboard';
-import Event from '../../features/events/Event';
+import EventDetails from '../../features/events/EventDetails';
 
 function App() {
   return (
@@ -49,7 +49,7 @@ function Events() {
       <Container style={{marginTop: "7em"}}>
         <Routes>          
           <Route path='/' element={<EventDashboard />} />
-          <Route path=':id' element={<Event />} />
+          <Route path=':id' element={<EventDetails />} />
         </Routes>
       </Container>
     </>
