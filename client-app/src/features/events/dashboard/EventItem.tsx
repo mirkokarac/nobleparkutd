@@ -1,8 +1,8 @@
 import { SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Icon, Item, ItemImage, Segment } from "semantic-ui-react";
-import { Event } from "../../app/models/event"
-import { useStore } from "../../app/stores/store";
+import { Event } from "../../../app/models/event"
+import { useStore } from "../../../app/stores/store";
 
 interface Props 
 {
