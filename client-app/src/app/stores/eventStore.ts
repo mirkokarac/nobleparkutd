@@ -92,6 +92,7 @@ export default class EventStore
 
     private setEvent = (event: Event) =>
     {
+        event.eventDate = event.eventDate.split('T')[0];
         this.eventRegistry.set(event.id, event);
     }
 
