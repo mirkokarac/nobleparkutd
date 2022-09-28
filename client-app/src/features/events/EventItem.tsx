@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Item, Label } from "semantic-ui-react";
+import { Button, Icon, Item, ItemImage, Segment } from "semantic-ui-react";
 import { Event } from "../../app/models/event"
 import { useStore } from "../../app/stores/store";
 
@@ -22,29 +22,37 @@ export default function EventItem({event} : Props)
     }
         
     return (
-        <Item key={event.id}>
-        <Item.Content>
-            <Item.Header as="a">
-                {event.title}
-            </Item.Header>
-            <Item.Meta>{event.eventDate}</Item.Meta>
-            <Item.Description>
-                {event.description}
-            </Item.Description>
-            <Item.Extra>
-                <Button as={Link} to={`/events/${event.id}`}
-                    floated="right" content="View" 
-                    className="nbu-blue-bg nbu-white" />                                
+        <Segment.Group>
+            <Segment>
+                <Item.Group>
+                    <Item>
+                        <ItemImage size="tiny" circular src="/assets/placeholder.png" />
+                        <Item.Content>
+                            <Item.Header as={Link} to={`/events/${event.id}`}>{event.title}</Item.Header>
+                            <Item.Description>{event.description}</Item.Description>
+                        </Item.Content>
+                    </Item>
+                </Item.Group>
+            </Segment>
+            <Segment>
+                <span>
+                    <Icon name="clock" /> {event.eventDate}
+                    <Icon name="marker" /> to be event venue
+                </span>
+            </Segment>
+            <Segment secondary>
+                Attendees go here
+            </Segment>
+            <Segment clearing>
+                <span>{event.description}</span>
                 <Button 
-                    name={event.id}
-                    onClick={(e) => handleEventDelete(e, event.id)} 
-                    floated="right" content="Delete" 
-                    className="nbu-red-bg nbu-white"
-                    loading={loading && target === event.id} 
+                    as={Link} 
+                    to={`/events/${event.id}`}
+                    color="teal"
+                    floated="right"
+                    content="View" 
                 />
-                <Label basic content={event.title} />
-            </Item.Extra>
-        </Item.Content>
-    </Item>
+            </Segment>
+        </Segment.Group>
     )
 };
