@@ -27,6 +27,19 @@ export default class EventStore
             .sort((a, b) => a.title.localeCompare(b.title));
     }
 
+    get groupedEvents()
+    {
+        return Object.entries(
+            this.eventsByDate.reduce((events, event) =>
+            {
+                const eventDate = event.eventDate;
+                events[eventDate] = events[eventDate] ? [...events[eventDate], event] : [event];
+
+                return events;
+            }, {} as {[key: string]:Event[]})
+        )       
+    }
+
     loadEvents = async () =>
     {
         this.setLoadingInitial(true);
