@@ -24,7 +24,7 @@ export default observer(function Event()
     return (
         <Grid>
             <Grid.Column width={10}>
-                <EventDetailedHeader />
+                <EventDetailedHeader event={event} />
                 <EventDetailedInfo event={event} />
                 <EventDetailedChat />
             </Grid.Column>
